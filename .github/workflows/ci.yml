@@ -1,4 +1,4 @@
-name: CI
+name: ci
 
 on:
   push:
@@ -38,7 +38,7 @@ jobs:
         with:
           name: coverage
           path: coverage/
-          retention-days: 7
+          retention-days: 3
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v8
