@@ -7,4 +7,7 @@
 - Search menu bar items
 - Toggle ThawBar on active display
 - Open Thaw settings
+- Authorize Raycast for Settings URI automation
+- Toggle auto-rehide, show-on-hover, and hide application menus settings
+- Copy thaw:// URLs and create Quicklinks from the actions list
 - Installation check with link to GitHub
