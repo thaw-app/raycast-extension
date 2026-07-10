@@ -3,7 +3,7 @@ import { Action, ActionPanel, Color, List, Toast, open, showToast } from "@rayca
 import { THAW_INSTALL_URL, buildThawUrl, isThawInstalled, openThawUrl } from "@utils";
 import { useEffect, useState } from "react";
 
-function ActionItem({ action }: { action: ThawAction }) {
+function ActionItem({ action }: Readonly<{ action: ThawAction }>) {
   const url = buildThawUrl(action.action, action.query);
 
   return (
