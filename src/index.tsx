@@ -21,7 +21,9 @@ function ActionItem({ action }: Readonly<{ action: ThawAction }>) {
           <Action
             title="Run Action"
             icon={action.icon}
-            onAction={() => openThawUrl(action.action, action.successMessage, action.query)}
+            onAction={async () => {
+              await openThawUrl(action.action, action.successMessage, action.query);
+            }}
           />
           <Action.CopyToClipboard title="Copy thaw:// URL" content={url} shortcut={{ modifiers: ["cmd"], key: "c" }} />
           <Action.CreateQuicklink

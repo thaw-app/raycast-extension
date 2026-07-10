@@ -1,15 +1,15 @@
 import { Icon } from "@raycast/api";
 
 export interface SettingToggle {
-	key: "autoRehide" | "showOnHover" | "hideApplicationMenus";
+	readonly key: "autoRehide" | "showOnHover" | "hideApplicationMenus";
 	/** Suffix used in the Raycast command name: toggle-<suffix> */
-	commandSuffix: string;
-	title: string;
-	subtitle: string;
-	icon: Icon;
+	readonly commandSuffix: "auto-rehide" | "show-on-hover" | "hide-application-menus";
+	readonly title: string;
+	readonly subtitle: string;
+	readonly icon: Icon;
 }
 
-export const SETTING_TOGGLES: SettingToggle[] = [
+export const SETTING_TOGGLES = [
 	{
 		key: "autoRehide",
 		commandSuffix: "auto-rehide",
@@ -31,4 +31,4 @@ export const SETTING_TOGGLES: SettingToggle[] = [
 		subtitle: "Turn application menu hiding on or off",
 		icon: Icon.AppWindow,
 	},
-];
+] as const satisfies ReadonlyArray<SettingToggle>;

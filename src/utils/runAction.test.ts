@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { getThawAction } from "../data";
+import { getThawAction, type ThawActionId } from "../data";
 import { openThawUrl } from "./openUrl";
 import { runThawAction } from "./runAction";
 
@@ -22,7 +22,7 @@ describe("runThawAction", () => {
 	});
 
 	it("throws for unknown action ids", async () => {
-		await expect(runThawAction("not-a-real-action")).rejects.toThrow("Unknown Thaw action");
+		await expect(runThawAction("not-a-real-action" as ThawActionId)).rejects.toThrow("Unknown Thaw action");
 		expect(openThawUrl).not.toHaveBeenCalled();
 	});
 });

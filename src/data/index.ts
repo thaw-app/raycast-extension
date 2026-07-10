@@ -3,21 +3,46 @@ import { SETTING_TOGGLES } from "./settings";
 
 export type ThawActionSection = "actions" | "settings";
 
+/** Host/path segment used in `thaw://<action>` URLs. */
+export type ThawUrlAction =
+	| "toggle-hidden"
+	| "toggle-always-hidden"
+	| "search"
+	| "toggle-thawbar"
+	| "toggle-application-menus"
+	| "open-settings"
+	| "authorize"
+	| "toggle";
+
+export type ThawActionId =
+	| "toggle-hidden"
+	| "toggle-always-hidden"
+	| "search"
+	| "toggle-thawbar"
+	| "toggle-application-menus"
+	| "open-settings"
+	| "authorize-raycast"
+	| "toggle-auto-rehide"
+	| "toggle-show-on-hover"
+	| "toggle-hide-application-menus";
+
+export type ThawActionQuery = Readonly<Record<string, string>>;
+
 export interface ThawAction {
 	/** Matches the Raycast command `name` in package.json when a dedicated command exists. */
-	id: string;
-	action: string;
-	title: string;
-	subtitle: string;
-	query?: Record<string, string>;
-	successMessage: string;
-	section: ThawActionSection;
-	icon: Icon;
+	readonly id: ThawActionId;
+	readonly action: ThawUrlAction;
+	readonly title: string;
+	readonly subtitle: string;
+	readonly query?: ThawActionQuery;
+	readonly successMessage: string;
+	readonly section: ThawActionSection;
+	readonly icon: Icon;
 	/** True for thaw://authorize and toggle?key= — needs Automation Settings URI + whitelist. */
-	requiresSettingsURI?: boolean;
+	readonly requiresSettingsURI?: boolean;
 }
 
-const DIRECT_ACTIONS: ThawAction[] = [
+const DIRECT_ACTIONS = [
 	{
 		id: "toggle-hidden",
 		action: "toggle-hidden",
@@ -72,9 +97,9 @@ const DIRECT_ACTIONS: ThawAction[] = [
 		section: "actions",
 		icon: Icon.Gear,
 	},
-];
+] as const satisfies ReadonlyArray<ThawAction>;
 
-const SETTINGS_ACTIONS: ThawAction[] = [
+const SETTINGS_ACTIONS: readonly ThawAction[] = [
 	{
 		id: "authorize-raycast",
 		action: "authorize",
@@ -100,9 +125,9 @@ const SETTINGS_ACTIONS: ThawAction[] = [
 	),
 ];
 
-export const THAW_ACTIONS: ThawAction[] = [...DIRECT_ACTIONS, ...SETTINGS_ACTIONS];
+export const THAW_ACTIONS: readonly ThawAction[] = [...DIRECT_ACTIONS, ...SETTINGS_ACTIONS];
 
-export const getThawAction = (id: string): ThawAction => {
+export const getThawAction = (id: ThawActionId): ThawAction => {
 	const action = THAW_ACTIONS.find((candidate) => candidate.id === id);
 
 	if (!action) {
@@ -112,5 +137,5 @@ export const getThawAction = (id: string): ThawAction => {
 	return action;
 };
 
-export const DIRECT_THAW_ACTIONS = DIRECT_ACTIONS;
-export const SETTINGS_THAW_ACTIONS = SETTINGS_ACTIONS;
+export const DIRECT_THAW_ACTIONS: readonly ThawAction[] = DIRECT_ACTIONS;
+export const SETTINGS_THAW_ACTIONS: readonly ThawAction[] = SETTINGS_ACTIONS;

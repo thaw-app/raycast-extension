@@ -17,8 +17,9 @@ vi.mock("./error", () => ({
 }));
 
 describe("buildThawUrl", () => {
-	it("builds a path-only thaw URL", () => {
+	it("builds a path-only thaw URL without a trailing slash", () => {
 		expect(buildThawUrl("toggle-hidden")).toBe("thaw://toggle-hidden");
+		expect(buildThawUrl("toggle-hidden")).not.toContain("toggle-hidden/");
 	});
 
 	it("appends query params and skips empty values", () => {

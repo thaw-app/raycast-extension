@@ -4,6 +4,7 @@ import {
 	getThawAction,
 	SETTINGS_THAW_ACTIONS,
 	THAW_ACTIONS,
+	type ThawActionId,
 } from "./index";
 
 describe("THAW_ACTIONS", () => {
@@ -35,7 +36,7 @@ describe("THAW_ACTIONS", () => {
 	});
 
 	it("throws for unknown ids", () => {
-		expect(() => getThawAction("missing")).toThrow("Unknown Thaw action: missing");
+		expect(() => getThawAction("missing" as ThawActionId)).toThrow("Unknown Thaw action: missing");
 	});
 
 	it("does not expose the redundant useIceBar settings toggle", () => {

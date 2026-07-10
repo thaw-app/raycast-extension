@@ -1,12 +1,12 @@
+import { URLSearchParams } from "node:url";
 import { open, showHUD } from "@raycast/api";
-import { URL, URLSearchParams } from "node:url";
+import type { ThawUrlAction } from "../data";
 import { findThawApplication, THAW_INSTALL_URL } from "./checkInstall";
 import { showError } from "./error";
 
-export type ThawUrlQuery = Record<string, string | undefined>;
+export type ThawUrlQuery = Readonly<Record<string, string | undefined>>;
 
-export const buildThawUrl = (action: string, query?: ThawUrlQuery): string => {
-	const url = new URL(`thaw://${action}`);
+export const buildThawUrl = (action: ThawUrlAction | string, query?: ThawUrlQuery): string => {
 	const searchParams = new URLSearchParams();
 
 	for (const [key, value] of Object.entries(query ?? {})) {
@@ -15,12 +15,12 @@ export const buildThawUrl = (action: string, query?: ThawUrlQuery): string => {
 		}
 	}
 
-	url.search = searchParams.toString();
-	return url.toString();
+	const search = searchParams.toString();
+	return search ? `thaw://${action}?${search}` : `thaw://${action}`;
 };
 
 export const openThawUrl = async (
-	action: string,
+	action: ThawUrlAction | string,
 	successMessage: string,
 	query?: ThawUrlQuery,
 ) => {
