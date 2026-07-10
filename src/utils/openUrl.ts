@@ -6,7 +6,7 @@ import { showError } from "./error";
 
 export type ThawUrlQuery = Readonly<Record<string, string | undefined>>;
 
-export const buildThawUrl = (action: ThawUrlAction | string, query?: ThawUrlQuery): string => {
+export const buildThawUrl = (action: ThawUrlAction, query?: ThawUrlQuery): string => {
 	const searchParams = new URLSearchParams();
 
 	for (const [key, value] of Object.entries(query ?? {})) {
@@ -20,7 +20,7 @@ export const buildThawUrl = (action: ThawUrlAction | string, query?: ThawUrlQuer
 };
 
 export const openThawUrl = async (
-	action: ThawUrlAction | string,
+	action: ThawUrlAction,
 	successMessage: string,
 	query?: ThawUrlQuery,
 ) => {

@@ -29,9 +29,9 @@ describe("buildThawUrl", () => {
 	});
 
 	it("encodes multiple query params", () => {
-		expect(buildThawUrl("reveal-item", { bundle: "com.example.app", "item-id": undefined })).toBe(
-			"thaw://reveal-item?bundle=com.example.app",
-		);
+		expect(
+			buildThawUrl("toggle", { key: "useIceBar", display: "37D8832A-2D66-02CA-B9F7-8F30A301B230" }),
+		).toBe("thaw://toggle?key=useIceBar&display=37D8832A-2D66-02CA-B9F7-8F30A301B230");
 	});
 });
 
