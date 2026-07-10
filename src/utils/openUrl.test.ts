@@ -30,8 +30,12 @@ describe("buildThawUrl", () => {
 
 	it("encodes multiple query params", () => {
 		expect(
-			buildThawUrl("toggle", { key: "useIceBar", display: "37D8832A-2D66-02CA-B9F7-8F30A301B230" }),
-		).toBe("thaw://toggle?key=useIceBar&display=37D8832A-2D66-02CA-B9F7-8F30A301B230");
+			buildThawUrl("toggle", {
+				key: "showOnHover",
+				label: "Show on hover & delay",
+				display: undefined,
+			}),
+		).toBe("thaw://toggle?key=showOnHover&label=Show+on+hover+%26+delay");
 	});
 });
 

@@ -1,5 +1,4 @@
 import { Icon } from "@raycast/api";
-import { SETTING_TOGGLES } from "./settings";
 
 export type ThawActionSection = "actions" | "settings";
 
@@ -14,13 +13,11 @@ export type ThawUrlAction =
 	| "authorize"
 	| "toggle";
 
+/** Direct-action command ids share the same literals as their URL hosts. */
+type ThawDirectActionId = Exclude<ThawUrlAction, "authorize" | "toggle">;
+
 export type ThawActionId =
-	| "toggle-hidden"
-	| "toggle-always-hidden"
-	| "search"
-	| "toggle-thawbar"
-	| "toggle-application-menus"
-	| "open-settings"
+	| ThawDirectActionId
 	| "authorize-raycast"
 	| "toggle-auto-rehide"
 	| "toggle-show-on-hover"
@@ -99,7 +96,7 @@ const DIRECT_ACTIONS = [
 	},
 ] as const satisfies ReadonlyArray<ThawAction>;
 
-const SETTINGS_ACTIONS: readonly ThawAction[] = [
+const SETTINGS_ACTIONS = [
 	{
 		id: "authorize-raycast",
 		action: "authorize",
@@ -110,20 +107,40 @@ const SETTINGS_ACTIONS: readonly ThawAction[] = [
 		icon: Icon.Key,
 		requiresSettingsURI: true,
 	},
-	...SETTING_TOGGLES.map(
-		(setting): ThawAction => ({
-			id: `toggle-${setting.commandSuffix}`,
-			action: "toggle",
-			title: setting.title,
-			subtitle: setting.subtitle,
-			query: { key: setting.key },
-			successMessage: `Sent ${setting.title} to Thaw — requires Settings URI`,
-			section: "settings",
-			icon: setting.icon,
-			requiresSettingsURI: true,
-		}),
-	),
-];
+	{
+		id: "toggle-auto-rehide",
+		action: "toggle",
+		title: "Toggle Auto Rehide",
+		subtitle: "Turn automatic hidden-section rehide on or off",
+		query: { key: "autoRehide" },
+		successMessage: "Sent Toggle Auto Rehide to Thaw — requires Settings URI",
+		section: "settings",
+		icon: Icon.Clock,
+		requiresSettingsURI: true,
+	},
+	{
+		id: "toggle-show-on-hover",
+		action: "toggle",
+		title: "Toggle Show on Hover",
+		subtitle: "Turn hidden-section reveal on hover on or off",
+		query: { key: "showOnHover" },
+		successMessage: "Sent Toggle Show on Hover to Thaw — requires Settings URI",
+		section: "settings",
+		icon: Icon.Mouse,
+		requiresSettingsURI: true,
+	},
+	{
+		id: "toggle-hide-application-menus",
+		action: "toggle",
+		title: "Toggle Hide Application Menus",
+		subtitle: "Turn application menu hiding on or off",
+		query: { key: "hideApplicationMenus" },
+		successMessage: "Sent Toggle Hide Application Menus to Thaw — requires Settings URI",
+		section: "settings",
+		icon: Icon.AppWindow,
+		requiresSettingsURI: true,
+	},
+] as const satisfies ReadonlyArray<ThawAction>;
 
 export const THAW_ACTIONS: readonly ThawAction[] = [...DIRECT_ACTIONS, ...SETTINGS_ACTIONS];
 

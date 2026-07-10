@@ -8,6 +8,8 @@ on:
     types: [opened, synchronize, reopened]
 
 permissions:
+  # contents: read — checkout repository code for install/test/scan
+  # pull-requests: read — SonarQube PR analysis and decoration metadata
   contents: read
   pull-requests: read
 
