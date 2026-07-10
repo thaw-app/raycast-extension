@@ -12,9 +12,7 @@ function ActionItem({ action }: Readonly<{ action: ThawAction }>) {
       subtitle={action.subtitle}
       icon={action.icon}
       accessories={
-        action.requiresSettingsURI
-          ? [{ tag: { value: "Settings URI", color: Color.SecondaryText } }]
-          : undefined
+        action.requiresSettingsURI ? [{ tag: { value: "Settings URI", color: Color.SecondaryText } }] : undefined
       }
       actions={
         <ActionPanel>
@@ -25,7 +23,7 @@ function ActionItem({ action }: Readonly<{ action: ThawAction }>) {
               await openThawUrl(action.action, action.successMessage, action.query);
             }}
           />
-          <Action.CopyToClipboard title="Copy thaw:// URL" content={url} shortcut={{ modifiers: ["cmd"], key: "c" }} />
+          <Action.CopyToClipboard title="Copy Thaw URL" content={url} shortcut={{ modifiers: ["cmd"], key: "c" }} />
           <Action.CreateQuicklink
             title="Create Quicklink"
             quicklink={{ name: `Thaw: ${action.title}`, link: url }}

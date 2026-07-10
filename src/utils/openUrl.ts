@@ -7,35 +7,31 @@ import { showError } from "./error";
 export type ThawUrlQuery = Readonly<Record<string, string | undefined>>;
 
 export const buildThawUrl = (action: ThawUrlAction, query?: ThawUrlQuery): string => {
-	const searchParams = new URLSearchParams();
+  const searchParams = new URLSearchParams();
 
-	for (const [key, value] of Object.entries(query ?? {})) {
-		if (value) {
-			searchParams.set(key, value);
-		}
-	}
+  for (const [key, value] of Object.entries(query ?? {})) {
+    if (value) {
+      searchParams.set(key, value);
+    }
+  }
 
-	const search = searchParams.toString();
-	return search ? `thaw://${action}?${search}` : `thaw://${action}`;
+  const search = searchParams.toString();
+  return search ? `thaw://${action}?${search}` : `thaw://${action}`;
 };
 
-export const openThawUrl = async (
-	action: ThawUrlAction,
-	successMessage: string,
-	query?: ThawUrlQuery,
-) => {
-	try {
-		const thawApplication = await findThawApplication();
-		if (!thawApplication) {
-			await showHUD(`Thaw is not installed. Get it at: ${THAW_INSTALL_URL}`);
-			return false;
-		}
+export const openThawUrl = async (action: ThawUrlAction, successMessage: string, query?: ThawUrlQuery) => {
+  try {
+    const thawApplication = await findThawApplication();
+    if (!thawApplication) {
+      await showHUD(`Thaw is not installed. Get it at: ${THAW_INSTALL_URL}`);
+      return false;
+    }
 
-		await open(buildThawUrl(action, query));
-		await showHUD(successMessage);
-		return true;
-	} catch (error) {
-		await showError(error);
-		return false;
-	}
+    await open(buildThawUrl(action, query));
+    await showHUD(successMessage);
+    return true;
+  } catch (error) {
+    await showError(error);
+    return false;
+  }
 };
