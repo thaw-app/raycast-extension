@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/HeaderDarkRaycast.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/HeaderLightRaycast.svg">
-  <img alt="Thaw Raycast Extension" src="./assets/HeaderLightRaycast.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thaw-app/brand-assets/main/headers/raycast-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thaw-app/brand-assets/main/headers/raycast-light.svg">
+  <img alt="Thaw Raycast Extension" src="https://raw.githubusercontent.com/thaw-app/brand-assets/main/headers/raycast-light.svg">
 </picture>
 
 <br>
