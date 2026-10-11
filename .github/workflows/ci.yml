@@ -19,6 +19,7 @@ concurrency:
 
 jobs:
   ci:
+    if: github.repository == 'thaw-app/raycast-extension'
     name: ci
     runs-on: ubuntu-latest
     steps:
