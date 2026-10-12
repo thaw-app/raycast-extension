@@ -1,38 +1,25 @@
-# Kept in step with thaw-app/platform (defaults.dependabot in config/org.yaml).
+# Synced from thaw-app/platform. Edit config/repos.yaml there.
 version: 2
+multi-ecosystem-groups:
+  dependencies:
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+    assignees:
+      - "diazdesandi"
+    open-pull-requests-limit: 10
+
 updates:
   - package-ecosystem: "npm"
     directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 10
-    labels:
-      - "dependencies"
-    assignees:
-      - "diazdesandi"
-    groups:
-      npm:
-        patterns:
-          - "*"
-        update-types:
-          - "minor"
-          - "patch"
+    patterns:
+      - "*"
+    multi-ecosystem-group: "dependencies"
 
   - package-ecosystem: "github-actions"
     directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 10
-    labels:
-      - "dependencies"
-    assignees:
-      - "diazdesandi"
-    groups:
-      github-actions:
-        patterns:
-          - "*"
-        update-types:
-          - "minor"
-          - "patch"
+    patterns:
+      - "*"
+    multi-ecosystem-group: "dependencies"
