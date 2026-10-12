@@ -5,6 +5,9 @@
     "raycast-env.d.ts"
   ],
   "compilerOptions": {
+    "types": [
+      "node"
+    ],
     "lib": [
       "ES2023"
     ],
